@@ -14,6 +14,8 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+#[\AllowDynamicProperties]
+
 /**
  * Class used by AffiliateWP to enforce minimum requirements for itself and its add-ons.
  *
@@ -572,4 +574,28 @@ abstract class AffiliateWP_Requirements_Check_v1_1 {
 		}
 	}
 
+	/**
+	 * Set Dynamic Property
+	 *
+	 * @since 1.2.1
+	 *
+	 * @param string $property Name of property.
+	 * @param mixed  $value    The value.
+	 */
+	public function __set( string $property, $value ) : void {
+		$this->$property = $value;
+	}
+
+	/**
+	 * Get Dynamic Property
+	 *
+	 * @since 1.2.1
+	 *
+	 * @param string $property The name of the property.
+	 *
+	 * @return mixed The value of the property, null if none.
+	 */
+	public function __get( string $property ) {
+		return $this->$property ?? null;
+	}
 }

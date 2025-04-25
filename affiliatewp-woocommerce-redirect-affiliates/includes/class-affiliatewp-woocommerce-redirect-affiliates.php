@@ -11,6 +11,8 @@
 
 if ( ! class_exists( 'AffiliateWP_WooCommerce_Redirect_Affiliates' ) ) {
 
+	#[\AllowDynamicProperties]
+
 	/**
 	 * Setup class.
 	 *
@@ -45,9 +47,10 @@ if ( ! class_exists( 'AffiliateWP_WooCommerce_Redirect_Affiliates' ) ) {
 		 * The version number.
 		 *
 		 * @since 1.1
+		 * @since 1.2.1 This is now automatically updated in the `self::setup_instance()` method.
 		 * @var   string
 		 */
-		private $version = '1.2';
+		private $version = '0.0.0';
 
 		/**
 		 * Generates the main bootstrap instance.
@@ -85,8 +88,11 @@ if ( ! class_exists( 'AffiliateWP_WooCommerce_Redirect_Affiliates' ) ) {
 		 * @param string $file File path to the main plugin file.
 		 */
 		private static function setup_instance( $file ) {
-			self::$instance       = new AffiliateWP_WooCommerce_Redirect_Affiliates;
-			self::$instance->file = $file;
+
+			self::$instance = new AffiliateWP_WooCommerce_Redirect_Affiliates();
+
+			self::$instance->file    = $file;
+			self::$instance->version = get_plugin_data( self::$instance->file, false, false )['Version'] ?? '';
 		}
 
 		/**
@@ -117,7 +123,7 @@ if ( ! class_exists( 'AffiliateWP_WooCommerce_Redirect_Affiliates' ) ) {
 		 *
 		 * @return void
 		 */
-		protected function __clone() {
+		public function __clone() {
 			// Cloning instances of the class is forbidden.
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh? This object cannot be cloned.', 'affiliatewp-woocommerce-redirect-affiliates' ), '1.1' );
 		}
@@ -129,7 +135,7 @@ if ( ! class_exists( 'AffiliateWP_WooCommerce_Redirect_Affiliates' ) ) {
 		 *
 		 * @return void
 		 */
-		protected function __wakeup() {
+		public function __wakeup() {
 			// Unserializing instances of the class is forbidden
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh? This class cannot be unserialized.', 'affiliatewp-woocommerce-redirect-affiliates' ), '1.1' );
 		}
@@ -139,7 +145,7 @@ if ( ! class_exists( 'AffiliateWP_WooCommerce_Redirect_Affiliates' ) ) {
 		 *
 		 * @since 1.1
 		 */
-		private function __construct() {
+		public function __construct() {
 			self::$instance = $this;
 		}
 
@@ -246,7 +252,31 @@ if ( ! class_exists( 'AffiliateWP_WooCommerce_Redirect_Affiliates' ) ) {
 			}
 
 			return $links;
+		}
 
+		/**
+		 * Set Dynamic Property
+		 *
+		 * @since 1.2.1
+		 *
+		 * @param string $property Name of property.
+		 * @param mixed  $value    The value.
+		 */
+		public function __set( string $property, $value ) : void {
+			$this->$property = $value;
+		}
+
+		/**
+		 * Get Dynamic Property
+		 *
+		 * @since 1.2.1
+		 *
+		 * @param string $property The name of the property.
+		 *
+		 * @return mixed The value of the property, null if none.
+		 */
+		public function __get( string $property ) {
+			return $this->$property ?? null;
 		}
 	}
 }

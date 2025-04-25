@@ -1,12 +1,12 @@
 === AffiliateWP - WooCommerce Redirect Affiliates ===
 Tags: AffiliateWP, affiliate, Pippin Williamson, Andrew Munro, mordauk, pippinsplugins, sumobi, woocommerce, ecommerce, e-commerce, e commerce, selling, membership
 Requires at least: 5.2
-Tested up to: 6.0
-Requires PHP: 5.6
-Stable tag: 1.2
+Tested up to: 6.8
+Requires PHP: 7.4
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Contributors: sumobi, mordauk
+Contributors: sumobi, mordauk, aubreypwd
 
 Redirect affiliates to their affiliate area when they login via WooCommerce's /my-account page
 
@@ -38,6 +38,9 @@ OR you can just install it with WordPress by going to Plugins >> Add New >> and 
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 1.2.1 =
+* Improved: Compatibility with PHP 8
 
 = 1.2 =
 * New: Requires WordPress 5.2 minimum

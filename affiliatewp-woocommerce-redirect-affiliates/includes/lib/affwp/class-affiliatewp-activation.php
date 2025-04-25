@@ -14,6 +14,8 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+#[\AllowDynamicProperties]
+
 /**
  * AffiliateWP Activation Handler Class
  *
@@ -83,7 +85,7 @@ class AffiliateWP_Activation {
 
         // Is AffiliateWP installed?
         foreach ( $plugins as $plugin_path => $plugin ) {
-            
+
             if ( $plugin['Name'] == 'AffiliateWP' ) {
                 $this->has_affiliatewp = true;
                 break;
@@ -112,10 +114,35 @@ class AffiliateWP_Activation {
     public function missing_affiliatewp_notice() {
 
         if ( $this->has_affiliatewp ) {
-           echo '<div class="error"><p>' . sprintf( __( '%s requires %s. Please activate it to continue.', 'affiliatewp-afgf' ), $this->plugin_name, '<a href="https://affiliatewp.com/" title="AffiliateWP" target="_blank">AffiliateWP</a>' ) . '</p></div>'; 
+           echo '<div class="error"><p>' . sprintf( __( '%s requires %s. Please activate it to continue.', 'affiliatewp-afgf' ), $this->plugin_name, '<a href="https://affiliatewp.com/" title="AffiliateWP" target="_blank">AffiliateWP</a>' ) . '</p></div>';
 
         } else {
             echo '<div class="error"><p>' . sprintf( __( '%s requires %s. Please install it to continue.', 'affiliatewp-afgf' ), $this->plugin_name, '<a href="https://affiliatewp.com/" title="AffiliateWP" target="_blank">AffiliateWP</a>' ) . '</p></div>';
         }
     }
+
+	/**
+	 * Set Dynamic Property
+	 *
+	 * @since 1.2.1
+	 *
+	 * @param string $property Name of property.
+	 * @param mixed  $value    The value.
+	 */
+	public function __set( string $property, $value ) : void {
+		$this->$property = $value;
+	}
+
+	/**
+	 * Get Dynamic Property
+	 *
+	 * @since 1.2.1
+	 *
+	 * @param string $property The name of the property.
+	 *
+	 * @return mixed The value of the property, null if none.
+	 */
+	public function __get( string $property ) {
+		return $this->$property ?? null;
+	}
 }
