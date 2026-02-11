@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: AffiliateWP - WooCommerce Redirect Affiliates
- * Plugin URI: https://affiliatewp.com/add-ons/official-free/woocommerce-redirect-affiliates/
+ * Plugin URI: https://affiliatewp.com/addons/woocommerce-redirect-affiliates/
  * Description: Redirect affiliates to their affiliate area when they login via WooCommerce's /my-account page
  * Author: AffiliateWP
  * Author URI: https://affiliatewp.com
@@ -21,7 +21,6 @@
  * along with AffiliateWP. If not, see <http://www.gnu.org/licenses/>.
  *
  * @package AffiliateWP WooCommerce Redirect Affiliates
- * @category Core
  */
 
 // Exit if accessed directly.
@@ -163,7 +162,7 @@ class AffiliateWP_WRA_Requirements_Check extends AffiliateWP_Requirements_Check_
 	 * @return string Unmet requirements URL.
 	 */
 	protected function unmet_requirements_url() {
-		return 'https://docs.affiliatewp.com/article/2361-minimum-requirements-roadmaps';
+		return 'https://affiliatewp.com/docs/minimum-requirements-roadmap/';
 	}
 
 	/**
